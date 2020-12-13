@@ -16,12 +16,21 @@ fetch("https://api.discogs.com/users/cameliabrennan/collection/folders/0/release
             })
 
             labelsarray.push(...labels)
-
             console.log('label', labels)
         })
 
         console.log('labels array', labelsarray.sort())
         // TODO: count all the labels, update pagination -- for more results per page, get list of records per label, connect # to bar chart 
+
+        const fouradCount = labelsarray.filter(x => x === "4AD").length
+        console.log("4AD label count:", fouradCount)
+
+        const dfaCount = labelsarray.filter(x => x === "DFA").length
+        console.log("DFA label count:", dfaCount)
+
+        const mergeCount = labelsarray.filter(x => x === "Merge").length
+        console.log("Merge Records label count:", mergeCount)
+
         });
 
 
