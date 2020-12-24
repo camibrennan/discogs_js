@@ -20,7 +20,22 @@ fetch("https://api.discogs.com/users/cameliabrennan/collection/folders/0/release
         })
 
         console.log('labels array', labelsarray.sort())
-        // TODO: count all the labels, update pagination -- for more results per page, get list of records per label, connect # to bar chart 
+
+        // TODO: update pagination -- for more results per page
+        //get list of records per label
+        // connect # to bar chart 
+        // ["label 1", "label 1", "label 2", "label 2", "label 3"]
+        let uniqueLabels = uniquify(labelsarray)
+        // ["label 1", "label 2", "label 3"]
+
+        let labelCounts = {}
+
+        uniqueLabels.forEach((label) => {
+            labelCounts[label] = count(label, labelsarray)
+        })
+
+        console.log("labelCounts:", labelCounts)
+
 
         const fouradCount = labelsarray.filter(x => x === "4AD").length
         console.log("4AD label count:", fouradCount)
@@ -33,6 +48,12 @@ fetch("https://api.discogs.com/users/cameliabrennan/collection/folders/0/release
 
         });
 
+        function count(item, list) {
+            return list.filter(x => x === item).length
+        }
+        function uniquify(list) {
+            return [...new Set(list)]
+        }
 
 function mergeList() {
     console.log('isthisworking')
