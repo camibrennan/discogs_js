@@ -1,6 +1,9 @@
 const labelsarray = []
 
+
+
 fetch("https://api.discogs.com/users/cameliabrennan/collection/folders/0/releases")
+// TODO: update pagination -- for more results per page
     .then(response => response.json()) // string -> Object
     .then(data => {
         // data is a JavaScript Object
@@ -20,31 +23,19 @@ fetch("https://api.discogs.com/users/cameliabrennan/collection/folders/0/release
         })
 
         console.log('labels array', labelsarray.sort())
-
-        // TODO: update pagination -- for more results per page
-        //get list of records per label
-        // connect # to bar chart 
-        // ["label 1", "label 1", "label 2", "label 2", "label 3"]
+        
         let uniqueLabels = uniquify(labelsarray)
-        // ["label 1", "label 2", "label 3"]
-
         let labelCounts = {}
-
+        
         uniqueLabels.forEach((label) => {
             labelCounts[label] = count(label, labelsarray)
         })
-
+        
         console.log("labelCounts:", labelCounts)
-
-
-        const fouradCount = labelsarray.filter(x => x === "4AD").length
-        console.log("4AD label count:", fouradCount)
-
-        const dfaCount = labelsarray.filter(x => x === "DFA").length
-        console.log("DFA label count:", dfaCount)
-
-        const mergeCount = labelsarray.filter(x => x === "Merge").length
-        console.log("Merge Records label count:", mergeCount)
+        console.log("labelCounts 4AD:", labelCounts['4AD'])
+        console.log("labelCounts Barsuk:", labelCounts['Barsuk Records'])
+        console.log("labelCounts Merge:", labelCounts['Merge Records'])
+        console.log("labelCounts Dischord:", labelCounts['Dischord Records'])
 
         });
 
@@ -55,6 +46,14 @@ fetch("https://api.discogs.com/users/cameliabrennan/collection/folders/0/release
             return [...new Set(list)]
         }
 
+        function barsukList() {
+            barsukCount = labelCounts['Barsuk Records'] 
+            console.log('isthisworking')
+            alert(barsukCount); 
+        
+        }
+        
+     
 function mergeList() {
     console.log('isthisworking')
     alert('Merge Records: 98 records'); 
@@ -67,11 +66,6 @@ function beggarsList() {
 
 }
 
-function barsukList() {
-    console.log('isthisworking')
-    alert('Barsuk: 8'); 
-
-}
 
 function dominoList() {
     console.log('isthisworking')
@@ -96,6 +90,11 @@ function saddlecreekList() {
     alert('Saddle Creek: 23 records'); 
 
 }
+
+
+//{"pagination": {"page": 1, "pages": 9, "per_page": 50, 
+//"items": 401, "urls": {"last": "https://api.discogs.com/users/cameliabrennan/collection/folders/0/releases?page=9&per_page=50", 
+//"next": "https://api.discogs.com/users/cameliabrennan/collection/folders/0/releases?page=2&per_page=50"}},
 
 
 // Current token: oSilxsnwWSMNqmlSWLmLVCMvdpiftgoeAsUHzUPv
